@@ -1,0 +1,65 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "tasks": {
+    "test": {},
+    "//#test:root": {},
+    "//#test:e2e": {
+      "env": ["DATABASE_URL"]
+    },
+    "@velachess/db#test": {
+      "env": ["DATABASE_URL"]
+    },
+    "@velachess/queue#test": {
+      "env": ["DATABASE_URL"]
+    },
+    "@velachess/application#test": {
+      "env": ["DATABASE_URL"]
+    },
+    "@velachess/server#test": {
+      "env": ["DATABASE_URL"]
+    },
+    "@velachess/worker#test": {
+      "env": ["DATABASE_URL"]
+    },
+    "@velachess/web#test": {
+      "env": ["LINGUI_CONFIG"]
+    },
+    "@velachess/site#test": {
+      "dependsOn": ["@velachess/site#build"],
+      "env": ["LINGUI_CONFIG"]
+    },
+    "@velachess/site#lighthouse": {
+      "dependsOn": ["@velachess/site#test"],
+      "outputs": [".lighthouseci/reports/**"]
+    },
+    "typecheck": {},
+    "@velachess/web#typecheck": {
+      "dependsOn": ["@velachess/web#build"]
+    },
+    "@velachess/site#typecheck": {
+      "dependsOn": ["@velachess/site#build"]
+    },
+    "//#typecheck:root": {},
+    "//#lint:root": {},
+    "build": {
+      "outputs": ["dist/**"]
+    },
+    "@velachess/site#build": {
+      "outputs": [".next/**", "out/**"]
+    },
+    "start": {
+      "cache": false,
+      "persistent": true
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:migrate": {
+      "cache": false
+    }
+  }
+}
